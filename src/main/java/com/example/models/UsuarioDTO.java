@@ -9,28 +9,25 @@ package com.example.models;
  *
  * @author dlpol
  */
-public class PersonaDTO {
+public class UsuarioDTO {
     
-    private Long id;
+    private Long idUsuario;
     private String nombre;
     private String apellido;
-    private String fecha;
     private String telefono;
     private String correo;
-    private String localidad;
-    private String direccion;
+    private String residencia;
     private String contrasena;
-    private String tipo_documento;
 
-    public PersonaDTO() {
+    public UsuarioDTO() {
     }
     
-    public Long getId(){
-        return id;
+    public Long getIdUsuario(){
+        return idUsuario;
     }
     
-    public void setId(Long id){
-        this.id = id;
+    public void setIdUsuario(Long idUsuario){
+        this.idUsuario = idUsuario;
     }
     
     public String getNombre() {
@@ -49,14 +46,6 @@ public class PersonaDTO {
         this.apellido = apellido;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -73,20 +62,12 @@ public class PersonaDTO {
         this.correo = correo;
     }
 
-    public String getLocalidad() {
-        return localidad;
+    public String getResidencia() {
+        return residencia;
     }
 
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setResidencia(String residencia) {
+        this.residencia = residencia;
     }
 
     public String getContrasena() {
@@ -95,14 +76,6 @@ public class PersonaDTO {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public String getTipo_documento() {
-        return tipo_documento;
-    }
-
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
     }
     
     

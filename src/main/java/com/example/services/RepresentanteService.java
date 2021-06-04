@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.example.services;
-
 import com.example.PersistenceManager;
 import com.example.models.*;
 import java.util.ArrayList;
@@ -25,15 +24,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-
 /**
  *
  * @author dlpol
  */
 
-@Path("/cita")
+@Path("/representante")
 @Produces(MediaType.APPLICATION_JSON)
-public class CitaService {
+public class RepresentanteService {
     
     @PersistenceContext(unitName = "VacunaPU")
     EntityManager entityManager;
@@ -51,37 +49,37 @@ public class CitaService {
     @Path("/consultar")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        Query q = entityManager.createQuery("select u from Cita u order by u.idCita ASC");
-        List<Cita> citas = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin","*").entity(citas).build();
+        Query q = entityManager.createQuery("select u from Representante u order by u.idRepresentante ASC");
+        List<Representante> representantes = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin","*").entity(representantes).build();
     }
     
     @POST
-    @Path("/agendar")
-    // public Mueble buscarMueble(@PathParam("id") int id) {
-    // return catalogoEjb.buscarMueble((long) id);
+    @Path("/registro")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearCita(Cita cita) {
+    public Response createRepresentante(Representante representante) {
         JSONObject rta = new JSONObject();
-        Cita citaTmp = new Cita();
-        citaTmp.setFecha(cita.getFecha());
-        citaTmp.setSitio(cita.getSitio());
-        citaTmp.setHora(cita.getHora());
-        
-        
+        Representante representanteTmp = new Representante();
+        representanteTmp.setCorreo(representante.getCorreo());
+        representanteTmp.setApellido(representante.getApellido());
+        representanteTmp.setNombre(representante.getNombre());
+        representanteTmp.setIdRepresentante(representante.getIdRepresentante());
+        representanteTmp.setTelefono(representante.getTelefono());
+        representanteTmp.setContrasena(representante.getContrasena());
+        representanteTmp.setFecha(representante.getFecha());
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(citaTmp);
+            entityManager.persist(representanteTmp);
             entityManager.getTransaction().commit();
-            entityManager.refresh(citaTmp);
-            rta.put("cita_id", citaTmp.getIdCita());
+            entityManager.refresh(representanteTmp);
+            rta.put("persona_id", representanteTmp.getIdRepresentante());
         } 
         catch (Throwable t) {
             t.printStackTrace();
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            citaTmp = null;
+            representanteTmp = null;
         } 
         finally {
             entityManager.clear();
@@ -89,14 +87,4 @@ public class CitaService {
         }
         return Response.status(200).header("Access-Control-Allow-Origin","*").entity(rta).build();
     }
-    
-    @DELETE
-    @Path("/cancelar")
-    public void cancelarCita(){
-        //@PathParam("id") long id    /{id}
-        Query q = entityManager.createQuery("delete from Cita c where c.id=:1");
-        q.executeUpdate();
-        
-    }
-    
 }

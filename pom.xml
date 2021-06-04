@@ -134,4 +134,5 @@
             <url>file:${project.basedir}/lib</url>
         </repository>
     </repositories>
+    <name>PlatVaCov</name>
 </project>

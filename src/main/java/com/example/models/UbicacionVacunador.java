@@ -1,37 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.example.models;
-
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 /**
-*
-* @author Sanamayaa
-*/
-
+ *
+ * @author dlpol
+ */
 @Entity
-public class Cita implements Serializable {
-    
+public class UbicacionVacunador implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idCita;
+    private Long idUbicacionVacunador;
     
     @NotNull
     @Column(name = "create_at", updatable = false)
@@ -44,26 +42,18 @@ public class Cita implements Serializable {
     private Calendar updatedAt;
     
     private String fecha;
-    private String sitio; 
+    private String lugarActual; 
     private String hora;
-    
-    @ManyToOne(cascade=ALL)
-    @JoinColumn(name="idUsuario")
-    private Usuario usuario;
-    
-    @ManyToOne(cascade=ALL)
-    @JoinColumn(name="idPersonal")
-    private PersonalVacunacion personal;
-    
-    public Cita() {
-        
+    private Long idCita;
+
+    public UbicacionVacunador() {
     }
 
-    public Cita(String fecha, String hora, String sitio, Usuario usuario) {
+    public UbicacionVacunador(String fecha, String lugarActual, String hora, Long idCita) {
         this.fecha = fecha;
+        this.lugarActual = lugarActual;
         this.hora = hora;
-        this.sitio = sitio;
-        this.usuario = usuario;
+        this.idCita = idCita;
     }
     
     @PreUpdate
@@ -75,29 +65,29 @@ public class Cita implements Serializable {
     private void creationTimestamp() {
         this.createdAt = this.updatedAt = Calendar.getInstance();
     }
-    
-    public Long getIdCita() {
-        return idCita;
+
+    public Long getIdUbicacionVacunador() {
+        return idUbicacionVacunador;
+    }
+
+    public void setIdUbicacionVacunador(Long idUbicacionVacunador) {
+        this.idUbicacionVacunador = idUbicacionVacunador;
     }
 
     public String getFecha() {
         return fecha;
     }
 
-    public String getSitio() {
-        return sitio;
-    }
-
-    public void setIdCita(Long idCita) {
-        this.idCita = idCita;
-    }
-
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public void setSitio(String sitio) {
-        this.sitio = sitio;
+    public String getLugarActual() {
+        return lugarActual;
+    }
+
+    public void setLugarActual(String lugarActual) {
+        this.lugarActual = lugarActual;
     }
 
     public String getHora() {
@@ -108,20 +98,13 @@ public class Cita implements Serializable {
         this.hora = hora;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getIdCita() {
+        return idCita;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdCita(Long idCita) {
+        this.idCita = idCita;
     }
-
-    public PersonalVacunacion getPersonal() {
-        return personal;
-    }
-
-    public void setPersonal(PersonalVacunacion personal) {
-        this.personal = personal;
-    }
-
+    
+    
 }

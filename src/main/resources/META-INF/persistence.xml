@@ -3,7 +3,13 @@
   <persistence-unit name="VacunaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.example.models.Cita</class>
-    <class>com.example.models.Persona</class>
+    <class>com.example.models.Eps</class>
+    <class>com.example.models.PersonalVacunacion</class>
+    <class>com.example.models.ReporteSintomas</class>
+    <class>com.example.models.ReporteVacunacion</class>
+    <class>com.example.models.Representante</class>
+    <class>com.example.models.UbicacionVacunador</class>
+    <class>com.example.models.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>
